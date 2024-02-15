@@ -1,11 +1,9 @@
 from pyrogram import Client, filters
-from pyrogram.types import Message
 import os
 
 api_id = 23962937
 api_hash = 'e247a38e5d7d45235018717e76920252'
 app = Client('Client', api_id, api_hash)
-
 
 @app.on_message(filters.me & filters.text & filters.regex(r"\bлист\s+команд\b"))
 def handle_command_list(client, message):
@@ -44,13 +42,11 @@ This is why it was decided to announce public access to the bot as well as the m
 
 To open the list of commands, you can open the help by word - <code>лист команд</code>
 
-developer, founder of the idea of ​​a bot for an account - <code>I_CEIC.t.me</code>
+developer, founder of the idea of a bot for an account - <code>I_CEIC.t.me</code>
 bot curator bio for account - <code>EndlessBiography.t.me</code>
     """
     client.send_message(message.chat.id, text_to_send)
     message.delete()
-
-
 
 
 def create_file(client, message):
@@ -63,10 +59,9 @@ def create_file(client, message):
 
     with open(filename + ".txt", "w") as file:
         file.write(text)
-    
+
     client.send_message(message.chat.id, f"Файл {filename}.txt создан")
     message.delete()
-
 
 
 def write_to_file(client, message):
@@ -86,7 +81,6 @@ def write_to_file(client, message):
         message.delete()
 
 
-
 def delete_file(client, message):
     filename = message.text[len("удалить"):].strip()
     if not filename.endswith(".txt"):
@@ -98,7 +92,6 @@ def delete_file(client, message):
     else:
         client.send_message(message.chat.id, f"Файл {filename} не найден")
     message.delete()
-
 
 
 def modify_file(client, message):
@@ -117,12 +110,12 @@ def modify_file(client, message):
         client.send_message(message.chat.id, f"Файл {filename} не найден")
     message.delete()
 
+
 def list_files(client, message):
     txt_files = [file for file in os.listdir() if file.endswith(".txt")]
     txt_list = "\n".join(txt_files)
     client.send_message(message.chat.id, f"Файлы .txt в текущей директории:\n\n{txt_list}")
     message.delete()
-
 
 @app.on_message(filters.me & filters.text)
 def handle_message(client, message):
@@ -136,7 +129,6 @@ def handle_message(client, message):
         modify_file(client, message)
     elif message.text and message.text.startswith(("показать лист", "Показать лист")):
         list_files(client, message)
-
 
 print("""
 ▄▀▀ ▄▀▄ ▀█▀ █░█ █▀▀▄ █▄░█
