@@ -1,7 +1,6 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
 import os
-import time
 
 api_id = 23962937
 api_hash = 'e247a38e5d7d45235018717e76920252'
