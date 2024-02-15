@@ -1,2 +1,1 @@
 pyrogram
-platform==1.0.8
